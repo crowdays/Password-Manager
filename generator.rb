@@ -68,10 +68,10 @@ loop do
     rows = db.execute("SELECT label FROM passwords")
 
     if rows.empty?
-      puts "No labels found."
+      puts "#{RED}No labels found.#{STOP_COLOR}"
     else
       # Print the labels
-      puts "Labels:"
+      puts "#{BLUE}Labels:#{STOP_COLOR}"
       rows.each do |row|
         puts row[0]
       end
@@ -86,23 +86,23 @@ loop do
       password = rows.first.first
 
       # Prompt the user to retrieve, modify, or delete the password
-      print "Enter 'r' to retrieve the password, 'm' to modify the password, or 'd' to delete the password: "
+      print "Enter #{YELLOW}'r'#{STOP_COLOR} to retrieve the password, #{Green}'m'#{STOP_COLOR} to modify the password, or #{RED}'d'#{STOP_COLOR} to delete the password: "
       choice = gets.chomp.downcase
 
       case choice
       when 'r'
         # Show the password
-        puts "Password: #{password}"
+        puts "Password: #{BLUE}#{password}#{STOP_COLOR}"
 
         # Copy the password to the clipboard
         Win32::Clipboard.set_data(password)
-        puts "Password copied to clipboard."
+        puts "#{GREEN}Password copied to clipboard.#{STOP_COLOR}"
       when 'm'
         # Show the existing password
-        puts "Existing Password: #{password}"
+        puts "Existing Password:#{Purple} #{password}#{STOP_COLOR}"
 
         # Prompt the user for a new password
-        print "Enter a new password, or press enter to generate a new random password: "
+        print "#{YELLOW}Enter a new password, or press enter to generate a new random password: #{STOP_COLOR}"
         new_password = gets.chomp
 
         if new_password.empty?
